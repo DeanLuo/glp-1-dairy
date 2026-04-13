@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">用药日志</view>
+    <view class="log-list">
+      <text wx:if="{{logs.length === 0}}" class="empty-tip">暂无记录</text>
+      <view class="log-item" wx:for="{{logs}}" wx:key="id">
+        <text class="log-date">{{item.date}}</text>
+        <text class="log-med">{{item.medication}}</text>
+        <text class="log-dose">{{item.dose}}</text>
+      </view>
+    </view>
+  </view>
+</view>

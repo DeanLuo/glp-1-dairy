@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-card card">
+    <view class="avatar">
+      <text class="avatar-text">{{userInfo.nickName || '用户'}}</text>
+    </view>
+    <text class="user-name">{{userInfo.nickName || '点击登录'}}</text>
+  </view>
+
+  <!-- 用药提醒设置 -->
+  <view class="card">
+    <view class="section-title">用药提醒</view>
+    <view class="setting-row">
+      <text>开启提醒</text>
+      <switch checked="{{settings.reminderEnabled}}" bindchange="toggleReminder" />
+    </view>
+    <view class="setting-row" wx:if="{{settings.reminderEnabled}}">
+      <text>提醒时间</text>
+      <picker mode="time" value="{{settings.reminderTime}}" bindchange="setReminderTime">
+        <text class="picker-value">{{settings.reminderTime}}</text>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 数据管理 -->
+  <view class="card">
+    <view class="section-title">数据管理</view>
+    <view class="menu-item" bindtap="exportData">
+      <text>导出数据</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="card">
+    <view class="menu-item" bindtap="about">
+      <text>关于应用</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+</view>

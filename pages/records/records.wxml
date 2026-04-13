@@ -1,0 +1,54 @@
+<view class="container">
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <view class="tab {{activeTab === 'weight' ? 'active' : ''}}" bindtap="switchTab" data-tab="weight">体重</view>
+    <view class="tab {{activeTab === 'waist' ? 'active' : ''}}" bindtap="switchTab" data-tab="waist">腰围</view>
+    <view class="tab {{activeTab === 'sideEffect' ? 'active' : ''}}" bindtap="switchTab" data-tab="sideEffect">副作用</view>
+  </view>
+
+  <!-- 体重记录 -->
+  <view wx:if="{{activeTab === 'weight'}}" class="card">
+    <view class="section-title">记录体重</view>
+    <view class="input-row">
+      <input class="input-field" type="digit" placeholder="体重 (kg)" bindinput="bindWeightInput" value="{{weight}}" />
+      <text class="unit">kg</text>
+    </view>
+    <button class="btn-primary" bindtap="recordWeight">保存</button>
+  </view>
+
+  <!-- 腰围记录 -->
+  <view wx:if="{{activeTab === 'waist'}}" class="card">
+    <view class="section-title">记录腰围</view>
+    <view class="input-row">
+      <input class="input-field" type="digit" placeholder="腰围 (cm)" bindinput="bindWaistInput" value="{{waist}}" />
+      <text class="unit">cm</text>
+    </view>
+    <button class="btn-primary" bindtap="recordWaist">保存</button>
+  </view>
+
+  <!-- 副作用记录 -->
+  <view wx:if="{{activeTab === 'sideEffect'}}" class="card">
+    <view class="section-title">选择副作用</view>
+    <view class="side-effect-grid">
+      <view class="side-effect-item {{item.selected ? 'selected' : ''}}"
+            wx:for="{{sideEffects}}" wx:key="id"
+            bindtap="toggleSideEffect" data-id="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+    <input class="input-field" placeholder="其他副作用" bindinput="bindCustomSideEffect" value="{{customSideEffect}}" />
+    <button class="btn-primary" bindtap="recordSideEffects">保存</button>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="history card">
+    <view class="section-title">历史记录</view>
+    <view class="record-list">
+      <text wx:if="{{records.length === 0}}" class="empty-tip">暂无记录</text>
+      <view class="record-item" wx:for="{{records}}" wx:key="id">
+        <text class="record-date">{{item.date}}</text>
+        <text class="record-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+</view>

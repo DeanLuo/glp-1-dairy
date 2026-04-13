@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">选择药物</view>
+    <view class="medication-list">
+      <view class="medication-item {{selectedMedication.id === item.id ? 'active' : ''}}"
+            wx:for="{{medicationList}}" wx:key="id"
+            bindtap="selectMedication" data-id="{{item.id}}">
+        <text class="med-name">{{item.name}}</text>
+        <text class="med-dose">{{item.dose}}</text>
+        <text class="med-freq">{{item.frequency}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">用药信息</view>
+    <input class="input-field" placeholder="剂量 (mg)" bindinput="bindDoseInput" value="{{dose}}" />
+    <input class="input-field" placeholder="注射部位" bindinput="bindSiteInput" value="{{injectionSite}}" />
+    <input class="input-field" placeholder="时间" bindinput="bindTimeInput" value="{{time}}" />
+    <textarea class="input-field" placeholder="备注" bindinput="bindNoteInput" value="{{note}}" />
+  </view>
+
+  <button class="btn-primary" bindtap="recordMedication">确认记录</button>
+</view>

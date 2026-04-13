@@ -1,0 +1,33 @@
+<view class="container">
+  <!-- 问候 -->
+  <view class="greeting card">
+    <text class="greeting-text">{{greeting}}，GLP-1 使用者</text>
+  </view>
+
+  <!-- 下次用药提醒 -->
+  <view class="next-dose card" wx:if="{{nextDose}}">
+    <view class="section-title">下次用药</view>
+    <view class="dose-info">
+      <text class="dose-time">{{nextDose.time}}</text>
+      <text class="dose-name">{{nextDose.medication}}</text>
+      <text class="dose-amount">{{nextDose.dose}}</text>
+    </view>
+    <button class="btn-primary" bindtap="goToPage" data-path="/pages/medication/medication">立即记录</button>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions">
+    <view class="section-title">快捷记录</view>
+    <view class="action-grid">
+      <view class="action-item card" wx:for="{{quickActions}}" wx:key="name" bindtap="goToPage" data-path="{{item.path}}">
+        <text class="action-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体重趋势 -->
+  <view class="weight-trend card">
+    <view class="section-title">本周体重变化</view>
+    <text class="trend-placeholder">图表区域</text>
+  </view>
+</view>
