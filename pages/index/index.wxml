@@ -32,7 +32,7 @@
     <view class="section-title">快捷记录</view>
     <view class="action-grid">
       <view class="action-item" bindtap="goToPage" data-path="/pages/medication/medication">
-        <van-icon name="med-o" size="32px" color="#4A90D9" />
+        <van-icon name="plus" size="32px" color="#4A90D9" />
         <text class="action-text">用药记录</text>
       </view>
       <view class="action-item" bindtap="goToPage" data-path="/pages/records/records">
