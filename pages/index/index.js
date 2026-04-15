@@ -1,9 +1,9 @@
-const { formatDate } = require('../../utils/util')
-
 Page({
   data: {
     greeting: '',
     currentDate: '',
+    userInitial: 'U',
+    userName: 'GLP-1 使用者',
     nextDose: null,
     currentWeight: null,
     weightChange: null,
@@ -30,13 +30,14 @@ Page({
 
     // 设置日期
     const now = new Date()
-    const dateStr = `${now.getMonth() + 1}月${now.getDate()}日 ${['日', '一', '二', '三', '四', '五', '六'][now.getDay()]}`
+    const dateStr = `${now.getMonth() + 1}月${now.getDate()}日 周${['日', '一', '二', '三', '四', '五', '六'][now.getDay()]}`
 
-    // TODO: 从云数据库加载真实数据
+    // TODO: 从云数据库加载真实用户数据
     // 目前使用模拟数据
     this.setData({
       greeting,
       currentDate: dateStr,
+      userInitial: 'D',
       nextDose: {
         time: '20:00',
         medication: '司美格鲁肽',
@@ -60,5 +61,9 @@ Page({
 
   goToMedication() {
     wx.navigateTo({ url: '/pages/medication/medication' })
+  },
+
+  goToRecords() {
+    wx.navigateTo({ url: '/pages/records/records' })
   }
 })

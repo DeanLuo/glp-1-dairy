@@ -1,99 +1,106 @@
 <view class="page">
-  <!-- 顶部背景 -->
-  <view class="header">
-    <view class="header-content">
-      <view class="greeting">
-        <text class="greeting-time">{{greeting}}</text>
-        <text class="greeting-sub">GLP-1 使用者</text>
+  <!-- 顶部问候区 -->
+  <view class="hero">
+    <view class="hero-top">
+      <view class="user-info">
+        <view class="avatar-ring">
+          <text class="avatar-initial">{{userInitial}}</text>
+        </view>
+        <view class="greeting-block">
+          <text class="greeting-time">{{greeting}}</text>
+          <text class="greeting-name">{{userName}}</text>
+        </view>
       </view>
-      <view class="date-badge">
+      <view class="date-pill">
         <text class="date-text">{{currentDate}}</text>
       </view>
     </view>
   </view>
 
-  <!-- 内容区域 -->
+  <!-- 主内容 -->
   <view class="content">
-    <!-- 用药提醒卡片 -->
-    <view class="card" wx:if="{{nextDose}}">
-      <view class="card-header">
-        <text class="card-title">下次用药</text>
-        <van-tag type="primary" size="medium">{{nextDose.medication}}</van-tag>
-        <van-tag type="success" size="medium">{{nextDose.dose}}</van-tag>
-      </view>
-      <view class="card-body">
-        <view class="dose-info">
-          <van-icon name="clock-o" size="18px" color="#666" />
-          <text class="dose-time">{{nextDose.time}}</text>
+    <!-- 用药提醒 - 突出显示 -->
+    <view class="reminder-card" wx:if="{{nextDose}}">
+      <view class="reminder-left">
+        <view class="reminder-icon">
+          <van-icon name="clock-o" size="28px" color="#fff" />
         </view>
-        <van-button type="primary" size="small" round bind:click="goToMedication">立即记录</van-button>
+        <view class="reminder-info">
+          <text class="reminder-label">下次用药</text>
+          <text class="reminder-med">{{nextDose.medication}} · {{nextDose.dose}}</text>
+        </view>
+      </view>
+      <view class="reminder-right">
+        <text class="reminder-time">{{nextDose.time}}</text>
+        <van-button size="mini" round type="primary" bind:click="goToMedication">记录</van-button>
+      </view>
+    </view>
+
+    <!-- 体重追踪 -->
+    <view class="weight-section">
+      <view class="section-header">
+        <text class="section-title">体重记录</text>
+        <text class="section-link" bindtap="goToRecords">查看全部 ></text>
+      </view>
+      <view class="weight-card">
+        <view class="weight-main">
+          <view class="weight-current">
+            <text class="weight-value">{{currentWeight || '--'}}</text>
+            <text class="weight-unit">kg</text>
+          </view>
+          <view class="weight-change {{weightChange <= 0 ? 'positive' : 'negative'}}">
+            <van-icon name="{{weightChange <= 0 ? 'arrow-down' : 'arrow-up'}}" size="14px" />
+            <text class="change-value">{{weightChange ? (weightChange > 0 ? '+' : '') + weightChange : '0'}} kg</text>
+          </view>
+        </view>
+        <view class="weight-progress-wrap">
+          <view class="progress-labels">
+            <text class="progress-label">目标 {{targetWeight || '--'}} kg</text>
+            <text class="progress-percent">{{progressPercent || 0}}%</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{progressPercent || 0}}%"></view>
+          </view>
+        </view>
       </view>
     </view>
 
     <!-- 快捷记录 -->
-    <view class="card">
-      <view class="card-header">
-        <text class="card-title">快捷记录</text>
-      </view>
-      <view class="quick-actions">
-        <view class="action-item" bindtap="goToPage" data-path="/pages/medication/medication">
-          <view class="action-icon" style="background-color:#E8F4FF">
-            <van-icon name="plus" size="24px" color="#4A90D9" />
+    <view class="quick-section">
+      <text class="section-title">快捷记录</text>
+      <view class="quick-grid">
+        <view class="quick-item" bindtap="goToPage" data-path="/pages/medication/medication">
+          <view class="quick-icon" style="background: linear-gradient(135deg, #FF9A56 0%, #FF6B35 100%)">
+            <van-icon name="plus" size="22px" color="#fff" />
           </view>
-          <text class="action-text">用药记录</text>
+          <text class="quick-text">用药</text>
         </view>
-        <view class="action-item" bindtap="goToPage" data-path="/pages/records/records">
-          <view class="action-icon" style="background-color:#E8F8F0">
-            <van-icon name="chart-trending-o" size="24px" color="#07c160" />
+        <view class="quick-item" bindtap="goToPage" data-path="/pages/records/records">
+          <view class="quick-icon" style="background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)">
+            <van-icon name="chart-trending-o" size="22px" color="#fff" />
           </view>
-          <text class="action-text">体重记录</text>
+          <text class="quick-text">体重</text>
         </view>
-        <view class="action-item" bindtap="goToPage" data-path="/pages/records/records">
-          <view class="action-icon" style="background-color:#FFF4E8">
-            <van-icon name="warning-o" size="24px" color="#ff976a" />
+        <view class="quick-item" bindtap="goToPage" data-path="/pages/records/records">
+          <view class="quick-icon" style="background: linear-gradient(135deg, #A8E6CF 0%, #7FCDBB 100%)">
+            <van-icon name="warning-o" size="22px" color="#fff" />
           </view>
-          <text class="action-text">副作用</text>
+          <text class="quick-text">副作用</text>
         </view>
       </view>
     </view>
 
-    <!-- 体重数据 -->
-    <view class="card">
-      <view class="card-header">
-        <text class="card-title">体重追踪</text>
-      </view>
-      <view class="data-row">
-        <view class="data-item">
-          <text class="data-value">{{currentWeight || '--'}}</text>
-          <text class="data-label">当前 kg</text>
-        </view>
-        <view class="data-item">
-          <text class="data-value" style="color:{{weightChange <= 0 ? '#07c160' : '#ee0a24'}}">{{weightChange || '0'}}</text>
-          <text class="data-label">本周变化 kg</text>
-        </view>
-        <view class="data-item">
-          <text class="data-value">{{targetWeight || '--'}}</text>
-          <text class="data-label">目标 kg</text>
-        </view>
-      </view>
-      <view class="progress-section">
-        <van-progress color="#4A90D9" percentage="{{progressPercent || 0}}" show-pivot="{{true}}" />
-      </view>
-    </view>
-
-    <!-- 统计 -->
-    <view class="card">
-      <view class="card-header">
-        <text class="card-title">本周统计</text>
-      </view>
+    <!-- 本周统计 -->
+    <view class="stats-section">
+      <text class="section-title">本周小结</text>
       <view class="stats-row">
-        <view class="stat-item">
-          <text class="stat-value">{{medicationCount || 0}}</text>
-          <text class="stat-label">用药次数</text>
+        <view class="stat-card">
+          <text class="stat-number">{{medicationCount || 0}}</text>
+          <text class="stat-desc">次用药</text>
         </view>
-        <view class="stat-item">
-          <text class="stat-value">{{sideEffectCount || 0}}</text>
-          <text class="stat-label">副作用记录</text>
+        <view class="stat-card">
+          <text class="stat-number">{{sideEffectCount || 0}}</text>
+          <text class="stat-desc">次副作用</text>
         </view>
       </view>
     </view>
