@@ -1,0 +1,24 @@
+{
+  "name": "glp-1-dairy",
+  "version": "1.0.0",
+  "description": "帮助 GLP-1 使用者记录用药情况、体重变化、副作用追踪的微信小程序。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeanLuo/glp-1-dairy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DeanLuo/glp-1-dairy/issues"
+  },
+  "homepage": "https://github.com/DeanLuo/glp-1-dairy#readme",
+  "dependencies": {
+    "vant-weapp": "^0.5.29"
+  }
+}

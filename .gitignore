@@ -1,5 +1,6 @@
 # 微信小程序
 node_modules/
+miniprogram_npm/
 dist/
 *.log
 *. LOCK

@@ -1,0 +1,144 @@
+/* 首页样式 */
+.page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 问候区域 */
+.greeting-section {
+  background: linear-gradient(135deg, #4A90D9 0%, #67B3F5 100%);
+  padding: 40rpx 30rpx 100rpx;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.greeting-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.greeting-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting-time {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.greeting-sub {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 8rpx;
+}
+
+.greeting-date {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 12rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.date-text {
+  font-size: 26rpx;
+  color: #ffffff;
+}
+
+/* 内容区块 */
+.section {
+  padding: 0 24rpx;
+  margin-top: -60rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+  padding-left: 8rpx;
+}
+
+/* 用药卡片 */
+.dose-card {
+  border-radius: 20rpx !important;
+  overflow: hidden;
+}
+
+.dose-tag {
+  margin-left: 12rpx;
+}
+
+.dose-footer {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.dose-time {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  flex: 1;
+}
+
+/* 快捷操作网格 */
+.action-grid {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx 10rpx;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+/* 体重卡片 */
+.weight-card {
+  border-radius: 20rpx !important;
+  overflow: hidden;
+}
+
+.cell-icon {
+  margin-right: 16rpx;
+}
+
+.weight-progress {
+  margin-top: 20rpx;
+  padding: 0 30rpx;
+}
+
+/* 统计网格 */
+.stats-grid {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4A90D9;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}

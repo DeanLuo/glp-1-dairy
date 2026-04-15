@@ -1,33 +1,94 @@
-<view class="container">
-  <!-- 问候 -->
-  <view class="greeting card">
-    <text class="greeting-text">{{greeting}}，GLP-1 使用者</text>
-  </view>
-
-  <!-- 下次用药提醒 -->
-  <view class="next-dose card" wx:if="{{nextDose}}">
-    <view class="section-title">下次用药</view>
-    <view class="dose-info">
-      <text class="dose-time">{{nextDose.time}}</text>
-      <text class="dose-name">{{nextDose.medication}}</text>
-      <text class="dose-amount">{{nextDose.dose}}</text>
-    </view>
-    <button class="btn-primary" bindtap="goToPage" data-path="/pages/medication/medication">立即记录</button>
-  </view>
-
-  <!-- 快捷操作 -->
-  <view class="quick-actions">
-    <view class="section-title">快捷记录</view>
-    <view class="action-grid">
-      <view class="action-item card" wx:for="{{quickActions}}" wx:key="name" bindtap="goToPage" data-path="{{item.path}}">
-        <text class="action-name">{{item.name}}</text>
+<view class="page">
+  <!-- 问候卡片 -->
+  <view class="greeting-section">
+    <view class="greeting-content">
+      <view class="greeting-text">
+        <text class="greeting-time">{{greeting}}</text>
+        <text class="greeting-sub">GLP-1 使用者</text>
+      </view>
+      <view class="greeting-date">
+        <text class="date-text">{{currentDate}}</text>
       </view>
     </view>
   </view>
 
+  <!-- 下次用药提醒 -->
+  <view class="section" wx:if="{{nextDose}}">
+    <van-card
+      title="下次用药"
+      bordered="{{false}}"
+      custom-class="dose-card"
+    >
+      <view slot="tags">
+        <van-tag type="primary" size="medium">{{nextDose.medication}}</van-tag>
+        <van-tag type="success" size="medium" class="dose-tag">{{nextDose.dose}}</van-tag>
+      </view>
+      <view slot="footer" class="dose-footer">
+        <van-icon name="clock-o" size="20px" />
+        <text class="dose-time">{{nextDose.time}}</text>
+        <van-button type="primary" size="small" round bind:click="goToMedication">立即记录</van-button>
+      </view>
+    </van-card>
+  </view>
+
+  <!-- 快捷记录 -->
+  <view class="section">
+    <view class="section-title">快捷记录</view>
+    <van-grid column-num="3" border="{{false}}" square="{{false}}" custom-class="action-grid">
+      <van-grid-item bind:click="goToPage" data-path="/pages/medication/medication">
+        <view class="action-item">
+          <van-icon name="med-o" size="32px" color="#4A90D9" />
+          <text class="action-text">用药记录</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item bind:click="goToPage" data-path="/pages/records/records">
+        <view class="action-item">
+          <van-icon name="chart-trending-o" size="32px" color="#07c160" />
+          <text class="action-text">体重记录</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item bind:click="goToPage" data-path="/pages/records/records">
+        <view class="action-item">
+          <van-icon name="warning-o" size="32px" color="#ff976a" />
+          <text class="action-text">副作用</text>
+        </view>
+      </van-grid-item>
+    </van-grid>
+  </view>
+
   <!-- 体重趋势 -->
-  <view class="weight-trend card">
+  <view class="section">
     <view class="section-title">本周体重变化</view>
-    <text class="trend-placeholder">图表区域</text>
+    <van-cell-group inset custom-class="weight-card">
+      <van-cell title="当前体重" value="{{currentWeight || '--'}} kg" border="{{false}}">
+        <van-icon slot="icon" name="aim" size="20px" color="#4A90D9" class="cell-icon" />
+      </van-cell>
+      <van-cell title="本周变化" value="{{weightChange || '0'}} kg" border="{{false}}">
+        <van-icon slot="icon" name="ascending" size="20px" color="{{weightChange <= 0 ? '#07c160' : '#ee0a24'}}" class="cell-icon" />
+      </van-cell>
+      <van-cell title="目标体重" value="{{targetWeight || '--'}} kg" border="{{false}}">
+        <van-icon slot="icon" name="flag-o" size="20px" color="#4A90D9" class="cell-icon" />
+      </van-cell>
+    </van-cell-group>
+    <van-progress pivot-text="已完成" color="#4A90D9" percentage="{{progressPercent || 0}}" show-pivot="{{true}}" class="weight-progress" />
+  </view>
+
+  <!-- 用药统计 -->
+  <view class="section">
+    <view class="section-title">本周用药统计</view>
+    <van-grid column-num="2" border="{{false}}" gutter="{{10}}" custom-class="stats-grid">
+      <van-grid-item>
+        <view class="stat-item">
+          <text class="stat-value">{{medicationCount || 0}}</text>
+          <text class="stat-label">已用药次数</text>
+        </view>
+      </van-grid-item>
+      <van-grid-item>
+        <view class="stat-item">
+          <text class="stat-value">{{sideEffectCount || 0}}</text>
+          <text class="stat-label">副作用记录</text>
+        </view>
+      </van-grid-item>
+    </van-grid>
   </view>
 </view>
