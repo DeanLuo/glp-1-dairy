@@ -14,11 +14,7 @@
 
   <!-- 下次用药提醒 -->
   <view class="section" wx:if="{{nextDose}}">
-    <van-card
-      title="下次用药"
-      bordered="{{false}}"
-      custom-class="dose-card"
-    >
+    <van-card title="下次用药" bordered="{{false}}" custom-class="dose-card">
       <view slot="tags">
         <van-tag type="primary" size="medium">{{nextDose.medication}}</van-tag>
         <van-tag type="success" size="medium" class="dose-tag">{{nextDose.dose}}</van-tag>
@@ -34,26 +30,20 @@
   <!-- 快捷记录 -->
   <view class="section">
     <view class="section-title">快捷记录</view>
-    <van-grid column-num="3" border="{{false}}" square="{{false}}" custom-class="action-grid">
-      <van-grid-item bind:click="goToPage" data-path="/pages/medication/medication">
-        <view class="action-item">
-          <van-icon name="med-o" size="32px" color="#4A90D9" />
-          <text class="action-text">用药记录</text>
-        </view>
-      </van-grid-item>
-      <van-grid-item bind:click="goToPage" data-path="/pages/records/records">
-        <view class="action-item">
-          <van-icon name="chart-trending-o" size="32px" color="#07c160" />
-          <text class="action-text">体重记录</text>
-        </view>
-      </van-grid-item>
-      <van-grid-item bind:click="goToPage" data-path="/pages/records/records">
-        <view class="action-item">
-          <van-icon name="warning-o" size="32px" color="#ff976a" />
-          <text class="action-text">副作用</text>
-        </view>
-      </van-grid-item>
-    </van-grid>
+    <view class="action-grid">
+      <view class="action-item" bindtap="goToPage" data-path="/pages/medication/medication">
+        <van-icon name="med-o" size="32px" color="#4A90D9" />
+        <text class="action-text">用药记录</text>
+      </view>
+      <view class="action-item" bindtap="goToPage" data-path="/pages/records/records">
+        <van-icon name="chart-trending-o" size="32px" color="#07c160" />
+        <text class="action-text">体重记录</text>
+      </view>
+      <view class="action-item" bindtap="goToPage" data-path="/pages/records/records">
+        <van-icon name="warning-o" size="32px" color="#ff976a" />
+        <text class="action-text">副作用</text>
+      </view>
+    </view>
   </view>
 
   <!-- 体重趋势 -->
@@ -76,19 +66,15 @@
   <!-- 用药统计 -->
   <view class="section">
     <view class="section-title">本周用药统计</view>
-    <van-grid column-num="2" border="{{false}}" gutter="{{10}}" custom-class="stats-grid">
-      <van-grid-item>
-        <view class="stat-item">
-          <text class="stat-value">{{medicationCount || 0}}</text>
-          <text class="stat-label">已用药次数</text>
-        </view>
-      </van-grid-item>
-      <van-grid-item>
-        <view class="stat-item">
-          <text class="stat-value">{{sideEffectCount || 0}}</text>
-          <text class="stat-label">副作用记录</text>
-        </view>
-      </van-grid-item>
-    </van-grid>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{medicationCount || 0}}</text>
+        <text class="stat-label">已用药次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{sideEffectCount || 0}}</text>
+        <text class="stat-label">副作用记录</text>
+      </view>
+    </view>
   </view>
 </view>

@@ -84,8 +84,11 @@
   flex: 1;
 }
 
-/* 快捷操作网格 */
+/* 快捷操作网格 - 使用flexbox */
 .action-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   background-color: #ffffff;
   border-radius: 20rpx;
   padding: 30rpx 10rpx;
@@ -96,6 +99,7 @@
   flex-direction: column;
   align-items: center;
   gap: 12rpx;
+  flex: 1;
 }
 
 .action-text {
@@ -120,6 +124,9 @@
 
 /* 统计网格 */
 .stats-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   background-color: #ffffff;
   border-radius: 20rpx;
   padding: 30rpx 0;
@@ -129,6 +136,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 }
 
 .stat-value {
