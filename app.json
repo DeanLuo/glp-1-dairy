@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/injection/injection",
     "pages/logs/logs",
     "pages/profile/profile",
     "pages/medication/medication",
