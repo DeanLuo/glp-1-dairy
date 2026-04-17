@@ -14,7 +14,8 @@ Page({
         datetime: '2026-04-15T20:00:00',
         formattedDate: '',
         formattedTime: '',
-        note: '注射后轻微恶心，持续约2小时'
+        weekday: '',
+        note: '注射后轻微恶心'
       },
       {
         id: '2',
@@ -25,6 +26,7 @@ Page({
         datetime: '2026-04-08T19:30:00',
         formattedDate: '',
         formattedTime: '',
+        weekday: '',
         note: ''
       },
       {
@@ -36,7 +38,8 @@ Page({
         datetime: '2026-03-20T08:00:00',
         formattedDate: '',
         formattedTime: '',
-        note: '首次使用利拉鲁肽'
+        weekday: '',
+        note: '首次使用'
       },
     ]
   },
@@ -46,20 +49,19 @@ Page({
   },
 
   onShow() {
-    // Refresh records when returning from add page
     this.initRecords()
   },
 
   initRecords() {
-    // Sort by datetime descending (most recent first)
+    const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
     const records = [...this.data.records].sort((a, b) => {
       return new Date(b.datetime) - new Date(a.datetime)
     })
-    // Apply formatting
     records.forEach(record => {
       const date = new Date(record.datetime)
       record.formattedDate = formatDate(date).substring(5) // MM-DD
       record.formattedTime = formatTime(date)
+      record.weekday = weekdays[date.getDay()]
     })
     this.setData({ records }, () => {
       this.applyFilter()
@@ -85,10 +87,5 @@ Page({
 
   addInjection() {
     wx.navigateTo({ url: '/pages/medication/medication?mode=injection' })
-  },
-
-  // TODO: Load from cloud DB
-  loadFromCloud() {
-    // Future: wx.cloud.database().collection('injections').get()
   }
 })

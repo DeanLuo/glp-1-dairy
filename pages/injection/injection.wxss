@@ -1,4 +1,4 @@
-/* 注射记录页面样式 */
+/* 注射记录页面 - 简洁列表设计 */
 page {
   font-size: 28rpx;
   color: #2D3436;
@@ -10,176 +10,142 @@ page {
   padding-bottom: 160rpx;
 }
 
-/* Header - Warm gradient */
-.header {
-  background: linear-gradient(160deg, #FFE5D9 0%, #FFCAD4 50%, #F0E6EF 100%);
-  padding: 48rpx 32rpx 60rpx;
-  position: relative;
-  overflow: hidden;
+/* 标题栏 */
+.title-bar {
+  padding: 40rpx 32rpx 24rpx;
+  background-color: #FAF9F7;
 }
 
-.header-content {
-  position: relative;
-  z-index: 1;
-}
-
-.header-title {
-  display: block;
-  font-size: 44rpx;
+.title {
+  font-size: 40rpx;
   font-weight: 700;
   color: #2D3436;
-  letter-spacing: -0.5rpx;
-}
-
-.header-subtitle {
   display: block;
-  font-size: 26rpx;
-  color: #636E72;
-  margin-top: 8rpx;
-}
-
-.header-icon {
-  position: absolute;
-  right: 32rpx;
-  top: 40rpx;
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 154, 86, 0.4) 0%, rgba(255, 107, 53, 0.4) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Filter tabs */
-.filter-tabs {
-  padding: 24rpx 0;
-  background-color: #FAF9F7;
-  border-bottom: 1px solid #F0E6EF;
-}
-
-.filter-scroll {
-  white-space: nowrap;
-  padding: 0 24rpx;
-}
-
-.filter-tab {
-  display: inline-block;
-  padding: 14rpx 28rpx;
-  border-radius: 30rpx;
-  font-size: 26rpx;
-  color: #636E72;
-  background-color: #ffffff;
-  margin-right: 16rpx;
-  border: 1px solid #E9ECEF;
-  transition: all 0.2s ease;
-}
-
-.filter-tab.active {
-  background: linear-gradient(135deg, #FF9A56 0%, #FF6B35 100%);
-  color: #ffffff;
-  border-color: transparent;
-  font-weight: 500;
-}
-
-/* Records container */
-.records-container {
-  padding: 24rpx;
-}
-
-/* Empty state */
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 80rpx 40rpx;
-  text-align: center;
-}
-
-.empty-icon {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  background-color: #F8F9FA;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 24rpx;
 }
 
-.empty-title {
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  gap: 16rpx;
+}
+
+.filter-item {
+  padding: 12rpx 24rpx;
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  color: #636E72;
+  background-color: #ffffff;
+}
+
+.filter-item.active {
+  background-color: #FF6B35;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 记录列表 */
+.list {
+  padding: 0 24rpx;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #2D3436;
+  font-weight: 500;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: #B2BEC3;
+  margin-top: 12rpx;
+}
+
+/* 单条记录 */
+.record {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 16rpx;
+  gap: 24rpx;
+}
+
+/* 日期区域 */
+.record-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80rpx;
+  padding-top: 4rpx;
+}
+
+.date-num {
   font-size: 32rpx;
   font-weight: 600;
   color: #2D3436;
+}
+
+.date-week {
+  font-size: 22rpx;
+  color: #B2BEC3;
+  margin-top: 4rpx;
+}
+
+/* 内容区域 */
+.record-content {
+  flex: 1;
+}
+
+.record-top {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
   margin-bottom: 12rpx;
 }
 
-.empty-desc {
-  font-size: 26rpx;
-  color: #B2BEC3;
-  margin-bottom: 32rpx;
+.drug-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2D3436;
 }
 
-/* Record card */
-.record-card {
-  background-color: #ffffff;
-  border-radius: 20rpx;
-  padding: 28rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20rpx;
-}
-
-.injection-number {
+.dose-tag {
   font-size: 24rpx;
-  color: #B2BEC3;
+  color: #FF6B35;
+  font-weight: 500;
+  background-color: #FFF4F0;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
 }
 
-.card-body {
-  border-top: 1px solid #F8F9FA;
-  padding-top: 20rpx;
-}
-
-.detail-row {
-  display: flex;
-  gap: 40rpx;
-  margin-bottom: 16rpx;
-}
-
-.detail-item {
+.record-info {
   display: flex;
   align-items: center;
   gap: 8rpx;
 }
 
-.detail-label {
-  font-size: 24rpx;
+.info-item {
+  font-size: 26rpx;
+  color: #636E72;
+}
+
+.info-sep {
   color: #B2BEC3;
-  margin-left: 4rpx;
 }
 
-.detail-value {
-  font-size: 28rpx;
-  color: #2D3436;
-  font-weight: 500;
-}
-
-.detail-value.dose {
-  color: #FF6B35;
-  font-weight: 600;
-}
-
-.detail-note {
+.record-note {
+  margin-top: 12rpx;
+  padding: 12rpx 16rpx;
   background-color: #FAF9F7;
-  border-radius: 12rpx;
-  padding: 16rpx;
-  margin-top: 8rpx;
+  border-radius: 10rpx;
 }
 
 .note-text {
@@ -188,18 +154,18 @@ page {
   line-height: 1.5;
 }
 
-/* Floating action button */
+/* 浮动按钮 */
 .fab {
   position: fixed;
   right: 32rpx;
   bottom: 60rpx;
-  width: 96rpx;
-  height: 96rpx;
+  width: 88rpx;
+  height: 88rpx;
   border-radius: 50%;
   background: linear-gradient(135deg, #FF9A56 0%, #FF6B35 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 30rpx rgba(255, 107, 53, 0.4);
+  box-shadow: 0 6rpx 24rpx rgba(255, 107, 53, 0.4);
   z-index: 100;
 }
