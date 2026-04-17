@@ -33,6 +33,18 @@ Page({
     this.setData({ sideEffects })
   },
 
+  bindWeightInput(e) {
+    this.setData({ weight: e.detail.value })
+  },
+
+  bindWaistInput(e) {
+    this.setData({ waist: e.detail.value })
+  },
+
+  bindCustomSideEffect(e) {
+    this.setData({ customSideEffect: e.detail.value })
+  },
+
   recordWeight() {
     if (!this.data.weight) {
       wx.showToast({ title: '请输入体重', icon: 'none' })
