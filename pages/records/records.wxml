@@ -44,10 +44,29 @@
   <view class="history card">
     <view class="section-title">历史记录</view>
     <view class="record-list">
-      <text wx:if="{{records.length === 0}}" class="empty-tip">暂无记录</text>
-      <view class="record-item" wx:for="{{records}}" wx:key="id">
-        <text class="record-date">{{item.date}}</text>
-        <text class="record-value">{{item.value}}</text>
+      <!-- 体重记录 -->
+      <view wx:if="{{activeTab === 'weight'}}">
+        <text wx:if="{{weightRecords.length === 0}}" class="empty-tip">暂无体重记录</text>
+        <view class="record-item" wx:for="{{weightRecords}}" wx:key="id">
+          <text class="record-date">{{item.date}}</text>
+          <text class="record-value">{{item.value}} kg</text>
+        </view>
+      </view>
+      <!-- 腰围记录 -->
+      <view wx:if="{{activeTab === 'waist'}}">
+        <text wx:if="{{waistRecords.length === 0}}" class="empty-tip">暂无腰围记录</text>
+        <view class="record-item" wx:for="{{waistRecords}}" wx:key="id">
+          <text class="record-date">{{item.date}}</text>
+          <text class="record-value">{{item.value}} cm</text>
+        </view>
+      </view>
+      <!-- 副作用记录 -->
+      <view wx:if="{{activeTab === 'sideEffect'}}">
+        <text wx:if="{{sideEffectRecords.length === 0}}" class="empty-tip">暂无副作用记录</text>
+        <view class="record-item" wx:for="{{sideEffectRecords}}" wx:key="id">
+          <text class="record-date">{{item.date}}</text>
+          <text class="record-value">{{item.value}}</text>
+        </view>
       </view>
     </view>
   </view>

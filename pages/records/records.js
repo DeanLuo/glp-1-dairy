@@ -1,3 +1,5 @@
+const { formatDate } = require('../../utils/util')
+
 Page({
   data: {
     activeTab: 'weight',
@@ -12,7 +14,9 @@ Page({
       { id: 6, name: '疲劳', selected: false },
     ],
     customSideEffect: '',
-    records: []
+    weightRecords: [],
+    waistRecords: [],
+    sideEffectRecords: []
   },
 
   onLoad() {
@@ -50,9 +54,17 @@ Page({
       wx.showToast({ title: '请输入体重', icon: 'none' })
       return
     }
-    // TODO: 保存到云数据库
+    const newRecord = {
+      id: Date.now(),
+      value: this.data.weight,
+      date: formatDate(new Date())
+    }
+    const records = [newRecord, ...this.data.weightRecords]
+    this.setData({
+      weightRecords: records,
+      weight: ''
+    })
     wx.showToast({ title: '记录成功', icon: 'success' })
-    this.loadRecords()
   },
 
   recordWaist() {
@@ -60,8 +72,17 @@ Page({
       wx.showToast({ title: '请输入腰围', icon: 'none' })
       return
     }
+    const newRecord = {
+      id: Date.now(),
+      value: this.data.waist,
+      date: formatDate(new Date())
+    }
+    const records = [newRecord, ...this.data.waistRecords]
+    this.setData({
+      waistRecords: records,
+      waist: ''
+    })
     wx.showToast({ title: '记录成功', icon: 'success' })
-    this.loadRecords()
   },
 
   recordSideEffects() {
@@ -70,8 +91,24 @@ Page({
       wx.showToast({ title: '请选择或输入副作用', icon: 'none' })
       return
     }
+    const names = selected.map(item => item.name).join(',')
+    if (this.data.customSideEffect) {
+      names ? names += ',' + this.data.customSideEffect : names = this.data.customSideEffect
+    }
+    const newRecord = {
+      id: Date.now(),
+      value: names,
+      date: formatDate(new Date())
+    }
+    const records = [newRecord, ...this.data.sideEffectRecords]
+    // Reset side effects
+    const sideEffects = this.data.sideEffects.map(item => ({ ...item, selected: false }))
+    this.setData({
+      sideEffectRecords: records,
+      sideEffects: sideEffects,
+      customSideEffect: ''
+    })
     wx.showToast({ title: '记录成功', icon: 'success' })
-    this.loadRecords()
   },
 
   loadRecords() {
