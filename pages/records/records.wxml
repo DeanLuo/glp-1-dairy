@@ -1,4 +1,9 @@
-<view class="container">
+<view class="page">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <text class="header-title">记录</text>
+  </view>
+
   <!-- Tab 切换 -->
   <view class="tab-bar">
     <view class="tab {{activeTab === 'weight' ? 'active' : ''}}" bindtap="switchTab" data-tab="weight">体重</view>
@@ -6,66 +11,71 @@
     <view class="tab {{activeTab === 'sideEffect' ? 'active' : ''}}" bindtap="switchTab" data-tab="sideEffect">副作用</view>
   </view>
 
-  <!-- 体重记录 -->
-  <view wx:if="{{activeTab === 'weight'}}" class="card">
-    <view class="section-title">记录体重</view>
-    <view class="input-row">
-      <input class="input-field" type="digit" placeholder="体重 (kg)" bindinput="bindWeightInput" value="{{weight}}" />
-      <text class="unit">kg</text>
-    </view>
-    <button class="btn-primary" bindtap="recordWeight">保存</button>
-  </view>
-
-  <!-- 腰围记录 -->
-  <view wx:if="{{activeTab === 'waist'}}" class="card">
-    <view class="section-title">记录腰围</view>
-    <view class="input-row">
-      <input class="input-field" type="digit" placeholder="腰围 (cm)" bindinput="bindWaistInput" value="{{waist}}" />
-      <text class="unit">cm</text>
-    </view>
-    <button class="btn-primary" bindtap="recordWaist">保存</button>
-  </view>
-
-  <!-- 副作用记录 -->
-  <view wx:if="{{activeTab === 'sideEffect'}}" class="card">
-    <view class="section-title">选择副作用</view>
-    <view class="side-effect-grid">
-      <view class="side-effect-item {{item.selected ? 'selected' : ''}}"
-            wx:for="{{sideEffects}}" wx:key="id"
-            bindtap="toggleSideEffect" data-id="{{item.id}}">
-        <text>{{item.name}}</text>
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 体重记录 -->
+    <view wx:if="{{activeTab === 'weight'}}" class="input-card">
+      <text class="input-card-title">记录体重</text>
+      <view class="input-group">
+        <input class="input-field" type="digit" placeholder="输入体重" bindinput="bindWeightInput" value="{{weight}}" />
+        <text class="input-suffix">kg</text>
       </view>
+      <button class="save-btn" bindtap="recordWeight">保存</button>
     </view>
-    <input class="input-field" placeholder="其他副作用" bindinput="bindCustomSideEffect" value="{{customSideEffect}}" />
-    <button class="btn-primary" bindtap="recordSideEffects">保存</button>
-  </view>
 
-  <!-- 历史记录 -->
-  <view class="history card">
-    <view class="section-title">历史记录</view>
-    <view class="record-list">
-      <!-- 体重记录 -->
-      <view wx:if="{{activeTab === 'weight'}}">
-        <text wx:if="{{weightRecords.length === 0}}" class="empty-tip">暂无体重记录</text>
-        <view class="record-item" wx:for="{{weightRecords}}" wx:key="id">
-          <text class="record-date">{{item.date}}</text>
-          <text class="record-value">{{item.value}} kg</text>
+    <!-- 腰围记录 -->
+    <view wx:if="{{activeTab === 'waist'}}" class="input-card">
+      <text class="input-card-title">记录腰围</text>
+      <view class="input-group">
+        <input class="input-field" type="digit" placeholder="输入腰围" bindinput="bindWaistInput" value="{{waist}}" />
+        <text class="input-suffix">cm</text>
+      </view>
+      <button class="save-btn" bindtap="recordWaist">保存</button>
+    </view>
+
+    <!-- 副作用记录 -->
+    <view wx:if="{{activeTab === 'sideEffect'}}" class="input-card">
+      <text class="input-card-title">选择副作用</text>
+      <view class="side-effect-grid">
+        <view class="side-effect-item {{item.selected ? 'selected' : ''}}"
+              wx:for="{{sideEffects}}" wx:key="id"
+              bindtap="toggleSideEffect" data-id="{{item.id}}">
+          {{item.name}}
         </view>
       </view>
-      <!-- 腰围记录 -->
-      <view wx:if="{{activeTab === 'waist'}}">
-        <text wx:if="{{waistRecords.length === 0}}" class="empty-tip">暂无腰围记录</text>
-        <view class="record-item" wx:for="{{waistRecords}}" wx:key="id">
-          <text class="record-date">{{item.date}}</text>
-          <text class="record-value">{{item.value}} cm</text>
+      <input class="custom-input" placeholder="其他副作用" bindinput="bindCustomSideEffect" value="{{customSideEffect}}" />
+      <button class="save-btn" bindtap="recordSideEffects">保存</button>
+    </view>
+
+    <!-- 历史记录 -->
+    <view class="history-card">
+      <text class="history-title">历史记录</text>
+      <view class="history-list">
+        <!-- 体重 -->
+        <view wx:if="{{activeTab === 'weight'}}">
+          <text wx:if="{{weightRecords.length === 0}}" class="empty-tip">暂无体重记录</text>
+          <view class="history-item" wx:for="{{weightRecords}}" wx:key="id">
+            <text class="history-date">{{item.date}}</text>
+            <text class="history-value highlight">{{item.value}} kg</text>
+          </view>
         </view>
-      </view>
-      <!-- 副作用记录 -->
-      <view wx:if="{{activeTab === 'sideEffect'}}">
-        <text wx:if="{{sideEffectRecords.length === 0}}" class="empty-tip">暂无副作用记录</text>
-        <view class="record-item" wx:for="{{sideEffectRecords}}" wx:key="id">
-          <text class="record-date">{{item.date}}</text>
-          <text class="record-value">{{item.value}}</text>
+        <!-- 腰围 -->
+        <view wx:if="{{activeTab === 'waist'}}">
+          <text wx:if="{{waistRecords.length === 0}}" class="empty-tip">暂无腰围记录</text>
+          <view class="history-item" wx:for="{{waistRecords}}" wx:key="id">
+            <text class="history-date">{{item.date}}</text>
+            <text class="history-value highlight">{{item.value}} cm</text>
+          </view>
+        </view>
+        <!-- 副作用 -->
+        <view wx:if="{{activeTab === 'sideEffect'}}">
+          <text wx:if="{{sideEffectRecords.length === 0}}" class="empty-tip">暂无副作用记录</text>
+          <view class="history-item" wx:for="{{sideEffectRecords}}" wx:key="id">
+            <text class="history-date">{{item.date}}</text>
+            <view class="history-tags">
+              <text class="history-tag" wx:for="{{item.value.split(',')}}" wx:for-item="tag">{{tag}}</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>
