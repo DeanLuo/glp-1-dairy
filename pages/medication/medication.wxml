@@ -1,24 +1,56 @@
-<view class="container">
-  <view class="card">
-    <view class="section-title">选择药物</view>
-    <view class="medication-list">
-      <view class="medication-item {{selectedMedication.id === item.id ? 'active' : ''}}"
-            wx:for="{{medicationList}}" wx:key="id"
-            bindtap="selectMedication" data-id="{{item.id}}">
-        <text class="med-name">{{item.name}}</text>
-        <text class="med-dose">{{item.dose}}</text>
-        <text class="med-freq">{{item.frequency}}</text>
+<view class="page">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <text class="header-title">用药记录</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 选择药物 -->
+    <view class="card">
+      <text class="card-title">选择药物</text>
+      <view class="medication-list">
+        <view class="medication-item {{selectedMedication.id === item.id ? 'active' : ''}}"
+              wx:for="{{medicationList}}" wx:key="id"
+              bindtap="selectMedication" data-id="{{item.id}}">
+          <view class="med-item-info">
+            <text class="med-name">{{item.name}}</text>
+            <text class="med-dose">{{item.dose}}</text>
+            <text class="med-freq">{{item.frequency}}</text>
+          </view>
+          <view class="med-radio"></view>
+        </view>
       </view>
     </view>
-  </view>
 
-  <view class="card">
-    <view class="section-title">用药信息</view>
-    <input class="input-field" placeholder="剂量 (mg)" bindinput="bindDoseInput" value="{{dose}}" />
-    <input class="input-field" placeholder="注射部位" bindinput="bindSiteInput" value="{{injectionSite}}" />
-    <input class="input-field" placeholder="时间" bindinput="bindTimeInput" value="{{time}}" />
-    <textarea class="input-field" placeholder="备注" bindinput="bindNoteInput" value="{{note}}" />
-  </view>
+    <!-- 用药信息 -->
+    <view class="card">
+      <text class="card-title">用药信息</text>
+      <view class="input-group">
+        <text class="input-label">剂量</text>
+        <view class="input-row">
+          <input class="input-field" type="digit" placeholder="输入剂量" bindinput="bindDoseInput" value="{{dose}}" />
+          <text class="input-suffix">mg</text>
+        </view>
+      </view>
+      <view class="input-group">
+        <text class="input-label">注射部位</text>
+        <view class="input-row">
+          <input class="input-field" placeholder="选择部位" bindinput="bindSiteInput" value="{{injectionSite}}" />
+        </view>
+      </view>
+      <view class="input-group">
+        <text class="input-label">时间</text>
+        <view class="input-row">
+          <input class="input-field" placeholder="选择时间" bindinput="bindTimeInput" value="{{time}}" />
+        </view>
+      </view>
+      <view class="input-group">
+        <text class="input-label">备注</text>
+        <textarea class="input-field" placeholder="添加备注（可选）" bindinput="bindNoteInput" value="{{note}}" />
+      </view>
+    </view>
 
-  <button class="btn-primary" bindtap="recordMedication">确认记录</button>
+    <button class="save-btn" bindtap="recordMedication">确认记录</button>
+  </view>
 </view>

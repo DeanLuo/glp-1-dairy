@@ -1,41 +1,98 @@
-<view class="container">
-  <!-- 用户信息 -->
-  <view class="user-card card">
-    <view class="avatar">
-      <text class="avatar-text">{{userInfo.nickName || '用户'}}</text>
-    </view>
-    <text class="user-name">{{userInfo.nickName || '点击登录'}}</text>
+<view class="page">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <text class="header-title">我的</text>
   </view>
 
-  <!-- 用药提醒设置 -->
-  <view class="card">
-    <view class="section-title">用药提醒</view>
-    <view class="setting-row">
-      <text>开启提醒</text>
-      <switch checked="{{settings.reminderEnabled}}" bindchange="toggleReminder" />
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 用户卡片 -->
+    <view class="user-card">
+      <view class="avatar">
+        <text class="avatar-text">{{userInitial}}</text>
+      </view>
+      <view class="user-info">
+        <text class="user-name">{{userName}}</text>
+        <text class="user-desc">GLP-1 使用者</text>
+      </view>
     </view>
-    <view class="setting-row" wx:if="{{settings.reminderEnabled}}">
-      <text>提醒时间</text>
-      <picker mode="time" value="{{settings.reminderTime}}" bindchange="setReminderTime">
-        <text class="picker-value">{{settings.reminderTime}}</text>
-      </picker>
-    </view>
-  </view>
 
-  <!-- 数据管理 -->
-  <view class="card">
-    <view class="section-title">数据管理</view>
-    <view class="menu-item" bindtap="exportData">
-      <text>导出数据</text>
-      <text class="arrow">></text>
+    <!-- 用药统计 -->
+    <view class="info-card">
+      <text class="info-card-title">用药统计</text>
+      <view class="med-grid">
+        <view class="med-item">
+          <text class="med-item-value">{{totalInjections}}</text>
+          <text class="med-item-label">总注射次数</text>
+        </view>
+        <view class="med-item">
+          <text class="med-item-value">{{currentDrug || '--'}}</text>
+          <text class="med-item-label">当前用药</text>
+        </view>
+        <view class="med-item">
+          <text class="med-item-value">{{daysSinceStart || 0}}</text>
+          <text class="med-item-label">用药天数</text>
+        </view>
+        <view class="med-item">
+          <text class="med-item-value">{{nextDoseDays || '--'}}</text>
+          <text class="med-item-label">距下次注射</text>
+        </view>
+      </view>
     </view>
-  </view>
 
-  <!-- 关于 -->
-  <view class="card">
-    <view class="menu-item" bindtap="about">
-      <text>关于应用</text>
-      <text class="arrow">></text>
+    <!-- 用药信息 -->
+    <view class="info-card">
+      <text class="info-card-title">用药信息</text>
+      <view class="info-row">
+        <text class="info-label">当前药物</text>
+        <text class="info-value highlight">{{currentDrug || '未设置'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">当前剂量</text>
+        <text class="info-value">{{currentDose || '--'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">注射频率</text>
+        <text class="info-value">{{frequency || '--'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">首次注射日期</text>
+        <text class="info-value">{{startDate || '--'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">下次注射时间</text>
+        <text class="info-value highlight">{{nextDoseTime || '--'}}</text>
+      </view>
+    </view>
+
+    <!-- 提醒设置 -->
+    <view class="info-card">
+      <text class="info-card-title">提醒设置</text>
+      <view class="setting-item" style="border-bottom:none; padding-bottom:0">
+        <view class="setting-item-left">
+          <view class="setting-icon orange">
+            <van-icon name="bell" size="22px" color="#FF6B35" />
+          </view>
+          <text class="setting-text">用药提醒</text>
+        </view>
+        <switch checked="{{reminderEnabled}}" bindchange="toggleReminder" color="#FF6B35" />
+      </view>
+      <view class="setting-item" style="border-bottom:none; padding-top:20rpx" wx:if="{{reminderEnabled}}">
+        <view class="setting-item-left">
+          <view class="setting-icon green">
+            <van-icon name="clock" size="22px" color="#07c160" />
+          </view>
+          <text class="setting-text">提醒时间</text>
+        </view>
+        <text class="info-value">{{reminderTime}}</text>
+      </view>
+    </view>
+
+    <!-- 关于 -->
+    <view class="about-card">
+      <text class="about-title">GLP-1 用药助手</text>
+      <text class="about-version">版本 1.0.0</text>
+      <text class="about-desc">帮助 GLP-1 使用者科学记录用药、管理健康</text>
     </view>
   </view>
 </view>

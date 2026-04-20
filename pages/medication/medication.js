@@ -26,6 +26,22 @@ Page({
     this.setData({ selectedMedication: medication })
   },
 
+  bindDoseInput(e) {
+    this.setData({ dose: e.detail.value })
+  },
+
+  bindSiteInput(e) {
+    this.setData({ injectionSite: e.detail.value })
+  },
+
+  bindTimeInput(e) {
+    this.setData({ time: e.detail.value })
+  },
+
+  bindNoteInput(e) {
+    this.setData({ note: e.detail.value })
+  },
+
   recordMedication() {
     if (!this.data.selectedMedication) {
       wx.showToast({ title: '请选择药物', icon: 'none' })
