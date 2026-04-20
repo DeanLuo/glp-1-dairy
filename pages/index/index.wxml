@@ -19,7 +19,7 @@
 
   <!-- 主内容 -->
   <view class="content">
-    <!-- 用药提醒 - 突出显示 -->
+    <!-- 用药提醒 -->
     <view class="reminder-card" wx:if="{{nextDose}}">
       <view class="reminder-left">
         <view class="reminder-icon">
@@ -42,7 +42,7 @@
         <text class="section-title">体重记录</text>
         <text class="section-link" bindtap="goToRecords">查看全部 ></text>
       </view>
-      <view class="weight-card">
+      <view class="weight-card" bindtap="goToRecords">
         <view class="weight-main">
           <view class="weight-current">
             <text class="weight-value">{{currentWeight || '--'}}</text>
@@ -69,19 +69,19 @@
     <view class="quick-section">
       <text class="section-title">快捷记录</text>
       <view class="quick-grid">
-        <view class="quick-item" bindtap="goToPage" data-path="/pages/medication/medication">
+        <view class="quick-item" bindtap="goToMedication">
           <view class="quick-icon" style="background: linear-gradient(135deg, #FF9A56 0%, #FF6B35 100%)">
             <van-icon name="plus" size="22px" color="#fff" />
           </view>
           <text class="quick-text">用药</text>
         </view>
-        <view class="quick-item" bindtap="goToPage" data-path="/pages/records/records">
+        <view class="quick-item" bindtap="goToRecords">
           <view class="quick-icon" style="background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)">
             <van-icon name="chart-trending-o" size="22px" color="#fff" />
           </view>
           <text class="quick-text">体重</text>
         </view>
-        <view class="quick-item" bindtap="goToPage" data-path="/pages/records/records">
+        <view class="quick-item" bindtap="goToRecords">
           <view class="quick-icon" style="background: linear-gradient(135deg, #A8E6CF 0%, #7FCDBB 100%)">
             <van-icon name="warning-o" size="22px" color="#fff" />
           </view>

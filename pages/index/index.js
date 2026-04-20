@@ -22,18 +22,14 @@ Page({
   },
 
   initData() {
-    // 设置问候语
     const hour = new Date().getHours()
     let greeting = '晚上好'
     if (hour < 12) greeting = '早上好'
     else if (hour < 18) greeting = '下午好'
 
-    // 设置日期
     const now = new Date()
     const dateStr = `${now.getMonth() + 1}月${now.getDate()}日 周${['日', '一', '二', '三', '四', '五', '六'][now.getDay()]}`
 
-    // TODO: 从云数据库加载真实用户数据
-    // 目前使用模拟数据
     this.setData({
       greeting,
       currentDate: dateStr,
@@ -52,18 +48,15 @@ Page({
     })
   },
 
-  goToPage(e) {
-    const path = e.currentTarget.dataset.path
-    if (path) {
-      wx.navigateTo({ url: path })
-    }
-  },
-
   goToMedication() {
-    wx.navigateTo({ url: '/pages/medication/medication' })
+    wx.switchTab({ url: '/pages/medication/medication' })
   },
 
   goToRecords() {
-    wx.navigateTo({ url: '/pages/records/records' })
+    wx.switchTab({ url: '/pages/records/records' })
+  },
+
+  goToProfile() {
+    wx.switchTab({ url: '/pages/profile/profile' })
   }
 })
